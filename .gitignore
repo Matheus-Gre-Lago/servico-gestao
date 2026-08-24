@@ -1,0 +1,25 @@
+# Dependências (Extremamente importante ignorar)
+node_modules/
+
+# Arquivos de Build/Compilação do TypeScript
+dist/
+build/
+
+# Banco de Dados Local (SQLite)
+# Como você tem o script de seed, o banco é recriado facilmente
+*.db
+*.db-journal
+
+# Variáveis de Ambiente
+.env
+.env.test
+
+# Logs de Erro do NPM
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Configurações de Sistema Operacional e Editores
+.DS_Store
+.vscode/
+.idea/

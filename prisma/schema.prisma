@@ -1,0 +1,46 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Cliente {
+  codigo      Int          @id @default(autoincrement())
+  nome        String
+  email       String
+  
+  // Relacionamento com as assinaturas (1 para N)
+  assinaturas Assinatura[]
+}
+
+model Plano {
+  codigo      Int          @id @default(autoincrement())
+  nome        String
+  custoMensal Float
+  data        DateTime     @updatedAt
+  descricao   String
+  
+  // Relacionamento com as assinaturas (1 para N)
+  assinaturas Assinatura[]
+}
+
+model Assinatura {
+  codigo              Int       @id @default(autoincrement())
+  codPlano            Int
+  codCli              Int
+  inicioFidelidade    DateTime
+  fimFidelidade       DateTime
+  dataUltimoPagamento DateTime?
+  
+  // Chaves estrangeiras e relacionamentos
+  plano   Plano   @relation(fields: [codPlano], references: [codigo])
+  cliente Cliente @relation(fields: [codCli], references: [codigo])
+}
